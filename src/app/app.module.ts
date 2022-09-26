@@ -17,18 +17,16 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+  declarations: [AppComponent],
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,     
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-  ]
-})
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  ],
   providers: [ UtilService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
