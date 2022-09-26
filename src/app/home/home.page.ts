@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { UtilService } from '../services/util.service';
+import { NavController } from '@ionic/angular';
 /////////////////////
 @Component({
   selector: 'app-home',
@@ -11,12 +12,16 @@ export class HomePage {
 
   tasks: any[] = [];
 
-  constructor(private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
+  constructor(private nav: NavController, private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
     let taskJson = localStorage.getItem('taskDb');
 
     if (taskJson != null) {
       this.tasks = JSON.parse(taskJson);
     }
+  }
+
+  goToRegistration(){
+    this.nav.navigateForward('registration');
   }
 
   async showAlert() {
