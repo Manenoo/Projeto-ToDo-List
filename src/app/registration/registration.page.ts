@@ -11,11 +11,13 @@ export class RegistrationPage implements OnInit {
     public authService: AuthenticationService,
     public router: Router
   ) { }
-  ngOnInit(){}
-  signUp(email, password){
-      this.authService.RegisterUser(email.value, password.value)      
+  ngOnInit() { }
+  signUp(email, password) {
+    this.authService.RegisterUser(email.value, password.value)
       .then((res) => {
         // Do something here
+        this.authService.SendVerificationMail()
+        this.router.navigate(['verify-email']);
       }).catch((error) => {
         window.alert(error.message)
       })

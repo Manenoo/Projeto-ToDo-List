@@ -45,6 +45,7 @@ export class AuthenticationService {
       });
     });
   }
+
   // Recover password
   PasswordRecover(passwordResetEmail) {
     return this.ngFireAuth
