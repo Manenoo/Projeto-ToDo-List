@@ -3,6 +3,7 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 import { UtilService } from '../services/util.service';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomePage {
 
   tasks: any[] = [];
 
-  constructor(private authService:  AuthenticationService,private nav: NavController, private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
+  constructor(public dB: AngularFireDatabase, private authService:  AuthenticationService,private nav: NavController, private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
     let taskJson = localStorage.getItem('taskDb');
 
     if (taskJson != null) {
@@ -45,7 +46,7 @@ export class HomePage {
           handler: (form) => {
 
             console.log(form.newTask);
-
+            
             this.add(form.newTask);
           }
         }
@@ -72,6 +73,13 @@ export class HomePage {
 
   updateLocalStorage() {
     localStorage.setItem('taskDb', JSON.stringify(this.tasks));
+  }
+
+  upDB(){
+    this.dB.database.ref('/tarefas').push(this.tasks.values)
+    .then(() => {
+      console.log('salvou');
+    })
   }
 
   async mark(task) {
