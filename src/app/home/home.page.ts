@@ -22,6 +22,26 @@ export class HomePage {
     }
   }
 
+  private PATH = 'tarefas/';
+
+  getAll() {
+    return this.dB.list(this.PATH)
+    
+  }
+
+  get(key: string) {
+
+  }
+
+  save(contact: any) {
+
+  }
+
+  remove(key: string){
+
+  }
+
+
   async showAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Adicionar tarefa',
