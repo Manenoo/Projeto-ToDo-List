@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
+import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
@@ -8,6 +10,7 @@ import { AuthenticationService } from "../shared/authentication-service";
 })
 export class RegistrationPage implements OnInit {
   constructor(
+    private nav: NavController,
     public authService: AuthenticationService,
     public router: Router
   ) { }
@@ -22,4 +25,7 @@ export class RegistrationPage implements OnInit {
         window.alert(error.message)
       })
   }
+  voltaHome(){
+    this.nav.navigateForward('home');
+    }
 }

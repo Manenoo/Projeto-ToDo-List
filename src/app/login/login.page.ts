@@ -1,8 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { userInfo } from 'os';
 import { AuthenticationService } from "../shared/authentication-service";
-import { User } from "../shared/user"
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +10,16 @@ import { User } from "../shared/user"
 })
 export class LoginPage implements OnInit {
   constructor(
+    private nav: NavController,
     public authService: AuthenticationService,
     public router: Router,
-    public user: User
   ) {}
   ngOnInit() {}
   logIn(email, password) {
-    this.user.email = email;
     this.authService.SignIn(email.value, password.value)
       .then((res) => {
         if(this.authService.isEmailVerified) {
-          this.authService.SetUserData(email.value);
+          
           this.router.navigate(['home']);
           window.alert('Email is verified')          
         } else {
@@ -32,4 +30,7 @@ export class LoginPage implements OnInit {
         window.alert(error.message)
       })
   }
+  voltaHome(){
+    this.nav.navigateForward('home');
+    }
 }

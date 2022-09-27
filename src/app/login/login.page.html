@@ -12,13 +12,13 @@
     <ion-input type="text" #email required></ion-input>
   </ion-item>
   <ion-item lines="full">
-    <ion-label position="floating">Password</ion-label>
+    <ion-label position="floating">Senha</ion-label>
     <ion-input type="password" #password required></ion-input>
   </ion-item>
   <ion-row>
     <ion-col>
       <ion-button type="submit" (click)="logIn(email, password)" expand="block"
-        >Login</ion-button
+        >Entrar</ion-button
       >
     </ion-col>
   </ion-row>
@@ -29,7 +29,7 @@
         color="secondary"
         [routerLink]="['/password-reset']"
       >
-        Password Reset
+        Recuperar Senha
       </ion-button>
     </ion-col>
   </ion-row>
@@ -41,8 +41,15 @@
         (click)="authService.GoogleAuth()"
         expand="block"
       >
-        Login with Google
+        Entrar com Google
       </ion-button>
     </ion-col>
   </ion-row>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="primary" (click)="voltaHome()">
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
