@@ -20,10 +20,6 @@ export class HomePage {
     }
   }
 
-  goToRegistration(){
-    this.nav.navigateForward('registration');
-  }
-
   async showAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Adicionar tarefa',
@@ -119,24 +115,59 @@ export class HomePage {
           type: 'delete'
         },
         handler: () => {
-          if(this.tasks.length > 0){
+          if (this.tasks.length > 0) {
             this.utilService.showToast('Tarefas excluídas');
           }
           this.tasks.splice(0, this.tasks.length);
           this.updateLocalStorage();
         }
-      },{
+      }, {
         text: 'Excluir tarefas feitas',
         role: 'destructive',
         icon: 'close-circle',
         handler: () => {
-          if(this.tasks.filter(taskArray => taskArray.done == true).length > 0){
+          if (this.tasks.filter(taskArray => taskArray.done == true).length > 0) {
             this.utilService.showToast('Tarefas excluídas');
           }
           this.tasks = this.tasks.filter(taskArray => taskArray.done == false);
           this.updateLocalStorage();
-        }     
-      }, 
+        }
+      },
+      {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  async chamaActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Log In',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Registrar',
+        icon: 'create',
+        handler: () => {
+          this.nav.navigateForward('registration');
+        }
+      }, {
+        text: 'Entrar',
+        icon: 'log-in',
+        handler: () => {
+          this.nav.navigateForward('login');
+        }
+      }, {
+        text: 'Sair',
+        icon: 'log-out',
+        handler: () => {
+          this.nav.navigateForward('dashboard');
+        }
+      },
       {
         text: 'Cancelar',
         icon: 'close',
