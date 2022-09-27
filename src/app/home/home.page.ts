@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { UtilService } from '../services/util.service';
 import { NavController } from '@ionic/angular';
-/////////////////////
+import { AuthenticationService } from "../shared/authentication-service";
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,7 +13,7 @@ export class HomePage {
 
   tasks: any[] = [];
 
-  constructor(private nav: NavController, private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
+  constructor(private authService:  AuthenticationService,private nav: NavController, private alertCtrl: AlertController, private utilService: UtilService, private actionSheetCtrl: ActionSheetController) {
     let taskJson = localStorage.getItem('taskDb');
 
     if (taskJson != null) {
@@ -165,7 +166,7 @@ export class HomePage {
         text: 'Sair',
         icon: 'log-out',
         handler: () => {
-          this.nav.navigateForward('dashboard');
+          this.authService.SignOut();
         }
       },
       {

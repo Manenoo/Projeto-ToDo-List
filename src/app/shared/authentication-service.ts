@@ -79,7 +79,8 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
+          window.alert('Email is verified')
         });
         this.SetUserData(result.user);
       })
